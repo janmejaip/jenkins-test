@@ -8,6 +8,7 @@ class SpringBootDockerApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("Test Success");
 	}
 
 }
