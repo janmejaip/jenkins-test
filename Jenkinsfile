@@ -29,14 +29,14 @@ pipeline {
 
    
   
-    // // Building Docker images
-    // stage('Building image') {
-    //   steps{
-    //     script {
-    //       sh "docker build -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
-    //     }
-    //   }
-    // }
+    // Building Docker images
+    stage('Building image') {
+      steps{
+        script {
+          sh "buildah bud -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
+        }
+      }
+    }
    
     // // Uploading Docker images into AWS ECR
     // stage('Pushing to ECR') {
