@@ -41,7 +41,13 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          sh "podman build -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
+          sh "id=$(buildah from --pull node:10)"
+          sh "buildah run $id mkdir -p /usr/src/app"
+          sh "buildah config --workingdir /usr/src/app $id"
+          sh "buildah copy $id $PWD ."
+          sh "buildah run --net host $id npm install"
+          sh "buildah config --port 1337 --entrypoint '["npm", "start"]' $id"
+          sh "buildah commit $id example-app"
         }
       }
     }
