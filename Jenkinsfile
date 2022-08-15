@@ -1,5 +1,8 @@
 pipeline {
-    agent any
+    agent {
+      label 'ecsAgent'
+    }
+    
     environment {
         AWS_ACCOUNT_ID="242865541181"
         AWS_DEFAULT_REGION="us-east-1" 
