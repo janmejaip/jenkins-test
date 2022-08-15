@@ -1,6 +1,6 @@
 pipeline {
     agent {
-      label 'ecsEc2Agent'
+      label 'ecsAgent'
     }
     environment {
         AWS_ACCOUNT_ID="242865541181"
