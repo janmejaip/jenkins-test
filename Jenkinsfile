@@ -39,6 +39,8 @@ sh "cd kaniko"
 sh "echo -e \"FROM gcr.io/kaniko-project/executor:latest \\nCOPY ./config.json /kaniko/.docker/config.json \\n\" >> Dockerfile"
 
 sh "echo -e \"{ \"credsStore\": \"ecr-login\" }\" >> config.json"
+
+sh "cat config.json"
 // # Create the Kaniko Config File for Registry Credentials
 // sh "cat << EOF > config.json
 // { "credsStore": "ecr-login" }
