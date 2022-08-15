@@ -31,8 +31,7 @@ pipeline {
     stage('Buildah Status') {
       steps{
         script {
-          sh "mkdir /var/lib/containers1"
-          sh "podman run -v ./build:/build:z -v /var/lib/containers1:/var/lib/containers:Z quay.io/buildah/stable buildah  -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} bud /build"
+          sh "buildah version"
         }
       }
     }
@@ -41,7 +40,9 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          sh "buildah bud --isolation=chroot -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
+          sh "mkdir build"
+          sh "mkdir /var/lib/containers1"
+          sh "podman run -v ./build:/build:z -v /var/lib/containers1:/var/lib/containers:Z quay.io/buildah/stable buildah  -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} bud /build"
         }
       }
     }
