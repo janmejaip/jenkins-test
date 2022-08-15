@@ -31,7 +31,8 @@ pipeline {
     stage('Buildah Status') {
       steps{
         script {
-          sh "buildah version"
+          sh "mkdir /var/lib/containers1"
+          sh "podman run -v ./build:/build:z -v /var/lib/containers1:/var/lib/containers:Z quay.io/buildah/stable buildah  -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} bud /build"
         }
       }
     }
