@@ -26,6 +26,14 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/janmejaip/jenkins-test.git']]])     
             }
         }
+
+    stage('Starting Container') {
+      steps{
+        script {
+          sh "systemctl service docker start"
+        }
+      }
+    }
   
     // Building Docker images
     stage('Building image') {
