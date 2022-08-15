@@ -27,7 +27,7 @@ pipeline {
             }
         }
 
-    stage('Starting Container') {
+    stage('Starting Kaniko') {
       steps{
         script {
           
@@ -36,15 +36,15 @@ sh "mkdir kaniko"
 sh "cd kaniko"
 
 // # Create the Container Image Dockerfle
-sh "cat << EOF > Dockerfile"
-sh "FROM gcr.io/kaniko-project/executor:latest"
-sh "COPY ./config.json /kaniko/.docker/config.json"
-sh "EOF"
+  sh "cat << EOF > Dockerfile
+  FROM gcr.io/kaniko-project/executor:latest
+  COPY ./config.json /kaniko/.docker/config.json
+  EOF"
 
 // # Create the Kaniko Config File for Registry Credentials
-sh "cat << EOF > config.json"
-sh "{ "credsStore": "ecr-login" }"
-sh "EOF"
+sh "cat << EOF > config.json
+{ "credsStore": "ecr-login" }
+EOF"
         }
       }
     }
