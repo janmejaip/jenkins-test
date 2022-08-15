@@ -27,13 +27,20 @@ pipeline {
             }
         }
 
-   
+   // Building Docker images
+    stage('Buildah Status') {
+      steps{
+        script {
+          sh "buildah version"
+        }
+      }
+    }
   
     // Building Docker images
     stage('Building image') {
       steps{
         script {
-          sh "buildah bud -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
+          sh "buildah bud --isolation=chroot -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
         }
       }
     }
