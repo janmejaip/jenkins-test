@@ -1,6 +1,6 @@
 pipeline {
     agent {
-      label 'ecsEc2Agent'
+      label 'ecsAgent'
     }
     environment {
         AWS_ACCOUNT_ID="242865541181"
@@ -27,27 +27,7 @@ pipeline {
             }
         }
 
-    stage('Starting Kaniko') {
-      steps{
-        script {
-          
-          // # Create a directory to store the container image artifacts
-sh "mkdir kaniko"
-sh "cd kaniko"
-
-// # Create the Container Image Dockerfle
-sh "echo -e \"FROM gcr.io/kaniko-project/executor:latest \\nCOPY ./config.json /kaniko/.docker/config.json \\n\" >> Dockerfile"
-
-sh "echo -e \"{ \"credsStore\": \"ecr-login\" }\" >> config.json"
-
-sh "cat config.json"
-// # Create the Kaniko Config File for Registry Credentials
-// sh "cat << EOF > config.json
-// { "credsStore": "ecr-login" }
-// EOF"
-        }
-      }
-    }
+   
   
     // // Building Docker images
     // stage('Building image') {
