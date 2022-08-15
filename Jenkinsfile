@@ -36,15 +36,12 @@ sh "mkdir kaniko"
 sh "cd kaniko"
 
 // # Create the Container Image Dockerfle
-  sh "cat << EOF > Dockerfile
-  FROM gcr.io/kaniko-project/executor:latest
-  COPY ./config.json /kaniko/.docker/config.json
-  EOF"
+sh "echo -e \"FROM gcr.io/kaniko-project/executor:latest \nCOPY ./config.json /kaniko/.docker/config.json \nEOF\" >> Dockerfile"
 
 // # Create the Kaniko Config File for Registry Credentials
-sh "cat << EOF > config.json
-{ "credsStore": "ecr-login" }
-EOF"
+// sh "cat << EOF > config.json
+// { "credsStore": "ecr-login" }
+// EOF"
         }
       }
     }
