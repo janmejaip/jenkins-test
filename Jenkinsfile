@@ -33,7 +33,7 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          sh "buildah --log-level=debug --security-opt seccomp=unconfined --security-opt label:disabled bud --format docker --isolation=chroot -f Dockerfile -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
+          sh "buildah  --storage-driver vfs --security-opt seccomp=unconfined --security-opt label:disabled bud --format docker --isolation=chroot -f Dockerfile -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
         }
       }
     }
