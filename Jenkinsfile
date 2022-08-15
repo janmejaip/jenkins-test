@@ -31,7 +31,7 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+          dockerImage = sudo.docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
         }
       }
     }
