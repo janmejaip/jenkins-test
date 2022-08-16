@@ -37,7 +37,7 @@ pipeline {
           // sh "docker run -it -e _BUILDAH_STARTED_IN_USERNS="" -e BUILDAH_ISOLATION=chroot --security-opt seccomp=unconfined --security-opt label:disabled quay.io/buildah/stable:latest /bin/sh"
 
           sh "export DOCKER_CONFIG=/kaniko/.docker"
-          sh "/kaniko/executor --context $(pwd) --dockerfile $(pwd)/Dockerfile --destination ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG} --destination ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:latest --force"
+          sh "/kaniko/executor --context \$(pwd) --dockerfile \$(pwd)/Dockerfile --destination ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG} --destination ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:latest --force"
         }
       }
     }
