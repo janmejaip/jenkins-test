@@ -3,7 +3,7 @@ pipeline {
       label 'ecsAgent'
     }
     environment {
-        AWS_ACCOUNT_ID="242865541181"
+        AWS_ACCOUNT_ID="583829956256"
         AWS_DEFAULT_REGION="us-east-1" 
         IMAGE_REPO_NAME="jenkins-build-pipeline"
         IMAGE_TAG="latest"
