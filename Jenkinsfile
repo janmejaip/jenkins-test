@@ -15,8 +15,12 @@ pipeline {
          stage('Logging into AWS ECR') {
             steps {
                 script {
-                sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION}"
-                sh "ls -la /home"
+
+                sh "cat /root/.aws/credentials"
+
+                sh "cat /kaniko/.docker/credentials"
+                // sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION}"
+
                 }
                  
             }
@@ -36,14 +40,8 @@ pipeline {
         script {
           // sh "buildah  --storage-driver vfs --security-opt seccomp=unconfined --security-opt label:disabled bud --format docker --isolation=chroot -f Dockerfile -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
           // sh "docker run -it -e _BUILDAH_STARTED_IN_USERNS="" -e BUILDAH_ISOLATION=chroot --security-opt seccomp=unconfined --security-opt label:disabled quay.io/buildah/stable:latest /bin/sh"
-         
-          sh "cat /kaniko/.docker/config.json"
-          sh "\$(pwd)"
-
           sh "export DOCKER_CONFIG=/kaniko/.docker"
           sh "/kaniko/executor --ignore-path=/root/.aws --context \$(pwd) --dockerfile \$(pwd)/Dockerfile --destination ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG} --destination ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:latest --force"
-
-          
         }
       }
     }
