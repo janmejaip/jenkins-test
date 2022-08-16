@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                 sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION}"
-                sh "ls -la ${pwd()}"
+                sh "ls -la /home"
                 }
                  
             }
@@ -37,7 +37,7 @@ pipeline {
           // sh "buildah  --storage-driver vfs --security-opt seccomp=unconfined --security-opt label:disabled bud --format docker --isolation=chroot -f Dockerfile -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
           // sh "docker run -it -e _BUILDAH_STARTED_IN_USERNS="" -e BUILDAH_ISOLATION=chroot --security-opt seccomp=unconfined --security-opt label:disabled quay.io/buildah/stable:latest /bin/sh"
          
-          sh "/kaniko/.docker/config.json"
+          sh "cat /kaniko/.docker/config.json"
           sh "\$(pwd)"
 
           sh "export DOCKER_CONFIG=/kaniko/.docker"
