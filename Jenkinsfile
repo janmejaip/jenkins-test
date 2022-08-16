@@ -18,7 +18,7 @@ pipeline {
 
                 sh "cat /root/.aws/credentials"
 
-                sh "cat /kaniko/.docker/credentials"
+                sh "cat /kaniko/.docker/config.json"
                 // sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION}"
 
                 }
